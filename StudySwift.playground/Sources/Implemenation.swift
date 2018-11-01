@@ -5,10 +5,12 @@ public class Implementation: Study {
     public init() {}
     
     public func run() {
-        let exec = 1
+        let exec = 2
         switch exec {
         case 1:
             execBeautifulDaysAtTheMovies()
+        case 2:
+            execViralAdvertising()
         default:
             print("nothing run code")
         }
@@ -36,7 +38,35 @@ public class Implementation: Study {
         print(res)
     }
     
-    
-    
-    
+    private func execViralAdvertising() {
+        
+        func viralAdvertising(n: Int) -> Int {
+            var sharedNum = 5
+            var liked: Int
+            var cumulative = 0
+            for _ in 1...n {
+                liked = sharedNum / 2
+                cumulative += liked
+                sharedNum = liked * 3
+            }
+            return cumulative
+        }
+        
+        let res = viralAdvertising(n: 3)
+        if res != 9 {
+            print("case1 Failure...")
+            return
+        }
+        let res2 = viralAdvertising(n: 5)
+        if res2 != 24 {
+            print("case2 Failure...")
+            return
+        }
+        let res3 = viralAdvertising(n: 10)
+        if res3 != 189 {
+            print("case3 Failure...")
+            return
+        }
+        print("Success")
+    }
 }
