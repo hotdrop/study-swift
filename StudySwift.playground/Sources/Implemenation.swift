@@ -102,4 +102,41 @@ public class Implementation: Study {
             return (rem <= n) ? rem : rem - n
         }
     }
+    
+    private func execSequenceEquation() {
+        
+        func checkArray(ownCalc results: [Int], answers: [Int]) -> Bool {
+            var success = true
+            for (result, answer) in zip(results, answers) {
+                if (result != answer) {
+                    print("Failure! result = \(result) correct answer = \(answer)")
+                    success = false
+                }
+            }
+            return success
+        }
+        
+        var result = sequenceEquation(p: [5, 2, 1, 3, 4])
+        if !checkArray(ownCalc: result, answers: [4, 2, 5, 1, 3]) {
+           return
+        }
+        result = sequenceEquation(p: [2, 3, 1])
+        if !checkArray(ownCalc: result, answers: [2, 3, 1]) {
+            return
+        }
+        result = sequenceEquation(p: [4, 3, 5, 1, 2])
+        if !checkArray(ownCalc: result, answers: [1, 3, 5, 4, 2]) {
+            return
+        }
+        print("Success!!")
+    }
+    
+    private func sequenceEquation(p: [Int]) -> [Int] {
+        let result = (0..<p.count).map { x in
+            (p.firstIndex(of: x + 1))! + 1
+        }.map { firstP in
+            (p.firstIndex(of: firstP))! + 1
+        }
+        return result
+    }
 }
