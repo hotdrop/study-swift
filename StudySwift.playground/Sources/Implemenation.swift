@@ -5,7 +5,7 @@ public class Implementation: Study {
     public init() {}
     
     public func run() {
-        let exec = 3
+        let exec = 4
         switch exec {
         case 1:
             execBeautifulDaysAtTheMovies()
@@ -13,6 +13,8 @@ public class Implementation: Study {
             execViralAdvertising()
         case 3:
             execSaveThePrisoner()
+        case 4:
+            execJumpingOnTheClouds()
         default:
             print("nothing run code")
         }
@@ -138,5 +140,35 @@ public class Implementation: Study {
             (p.firstIndex(of: firstP))! + 1
         }
         return result
+    }
+    
+    private func execJumpingOnTheClouds() {
+        let result = jumpingOnClouds(c: [0,0,1,0], k: 2)
+        if result != 96 {
+            print("Case1 Failure.. your answer = \(result) . correct answer = 96")
+        }
+        let result2 = jumpingOnClouds(c: [0,0,1,0,0,1,1,0], k: 2)
+        if result2 != 92 {
+            print("Case2 Failure.. your answer = \(result2) . correct answer = 92")
+        }
+        let result3 = jumpingOnClouds(c: [1,1,1,0,1,1,0,0,0,0], k: 3)
+        if result3 != 94 {
+            print("Case3 Failure.. your answer = \(result2) . correct answer = 94")
+        }
+        print("Success!")
+    }
+    
+    private func jumpingOnClouds(c: [Int], k: Int) -> Int {
+        var baseStep = c.count / k
+        if c.count % k != 0 {
+            baseStep += 1
+        }
+        var thunderCloudCount = 0
+        for index in 0..<c.count {
+            if (index % k == 0) && c[index] == 1 {
+                thunderCloudCount += 1
+            }
+        }
+        return 100 - (baseStep + (thunderCloudCount * 2))
     }
 }
