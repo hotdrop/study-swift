@@ -171,4 +171,34 @@ public class Implementation: Study {
         }
         return 100 - (baseStep + (thunderCloudCount * 2))
     }
+    
+    private func execFindDigits() {
+        let res1 = findDigits(n: 12)
+        if res1 != 2 {
+            print("Case1 Failure.. your answer = \(res1) correct = 2")
+            return
+        }
+        let res2 = findDigits(n: 111)
+        if res2 != 3 {
+            print("Case2 Failure.. your answer = \(res2) correct = 3")
+            return
+        }
+        let res3 = findDigits(n: 1012)
+        if res3 != 3 {
+            print("Case3 Failure.. your answer = \(res3) correct = 3")
+            return
+        }
+        print("Success")
+    }
+    
+    private func findDigits(n: Int) -> Int {
+        var cnt = 0
+        n.description.forEach {
+            let num = Int($0.description)!
+            if (num != 0) && (n % num == 0) {
+                cnt += 1
+            }
+        }
+        return cnt
+    }
 }
