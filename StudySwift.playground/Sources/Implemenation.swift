@@ -5,7 +5,7 @@ public class Implementation: Study {
     public init() {}
     
     public func run() {
-        let exec = 4
+        let exec = 5
         switch exec {
         case 1:
             execBeautifulDaysAtTheMovies()
@@ -15,6 +15,8 @@ public class Implementation: Study {
             execSaveThePrisoner()
         case 4:
             execJumpingOnTheClouds()
+        case 5:
+            execCutTheSticks()
         default:
             print("nothing run code")
         }
@@ -200,5 +202,39 @@ public class Implementation: Study {
             }
         }
         return cnt
+    }
+    
+    private func execCutTheSticks() {
+        let result1 = cutTheSticks(arr: [1,2,3])
+        if result1 != [3,2,1] {
+            print("case1 failure.. \(result1)")
+            return
+        }
+        let result2 = cutTheSticks(arr: [5,4,4,2,2,8])
+        if result2 != [6,4,2,1] {
+            print("case2 failure.. \(result2)")
+            return
+        }
+        let result3 = cutTheSticks(arr: [1,2,3,4,3,3,2,1])
+        if result3 != [8,6,4,1] {
+            print("case3 failure.. \(result3)")
+            return
+        }
+        print("Success!!")
+    }
+    
+    private func cutTheSticks(arr: [Int]) -> [Int] {
+        var results = [Int]()
+        var localArr = arr
+        
+        while (!localArr.isEmpty) {
+            results.append(localArr.count)
+            if let minVal = localArr.min() {
+                localArr = localArr.map { $0 - minVal }.filter { $0 > 0 }
+            } else {
+                break
+            }
+        }
+        return results
     }
 }
