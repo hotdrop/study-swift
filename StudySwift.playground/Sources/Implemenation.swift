@@ -5,7 +5,7 @@ public class Implementation: Study {
     public init() {}
     
     public func run() {
-        let exec = 5
+        let exec = 6
         switch exec {
         case 1:
             execBeautifulDaysAtTheMovies()
@@ -17,6 +17,8 @@ public class Implementation: Study {
             execJumpingOnTheClouds()
         case 5:
             execCutTheSticks()
+        case 6:
+            execRepeatedString()
         default:
             print("nothing run code")
         }
@@ -236,5 +238,37 @@ public class Implementation: Study {
             }
         }
         return results
+    }
+    private func execRepeatedString() {
+        let case1 = repeatedString(s: "abcab", n: 10)
+        if case1 != 4 {
+            print("case1 failure.. \(case1)")
+        }
+        let case2 = repeatedString(s: "aba", n: 10)
+        if case2 != 7 {
+            print("case2 failure.. \(case2)")
+        }
+        let case3 = repeatedString(s: "a", n: 1000000000000)
+        if case3 != 1000000000000 {
+            print("case3 failure.. \(case1)")
+        }
+        let case4 = repeatedString(s: "gfcaaaecbg", n: 547602)
+        if case4 != 164280 {
+            print("case4 failure.. \(case1)")
+        }
+        print("Success!")
+    }
+    private func repeatedString(s: String, n: Int) -> Int {
+        
+        func countChar(target: String) -> Int {
+            return target.filter { $0 == "a" }.count
+        }
+        
+        var result = countChar(target: s) * (n / s.count)
+        if (n % s.count != 0) {
+            let remainStr = s.prefix(n % s.count).description
+            result += countChar(target: remainStr)
+        }
+        return result
     }
 }
