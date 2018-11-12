@@ -5,7 +5,7 @@ public class Implementation: Study {
     public init() {}
     
     public func run() {
-        let exec = 6
+        let exec = 7
         switch exec {
         case 1:
             execBeautifulDaysAtTheMovies()
@@ -19,6 +19,8 @@ public class Implementation: Study {
             execCutTheSticks()
         case 6:
             execRepeatedString()
+        case 7:
+            execEqualizeArray()
         default:
             print("nothing run code")
         }
@@ -270,5 +272,46 @@ public class Implementation: Study {
             result += countChar(target: remainStr)
         }
         return result
+    }
+    
+    private func execEqualizeArray() {
+        let case1 = equalizeArray([1,2,2,3])
+        if case1  != 2 {
+            print("case1 failure.. \(case1)")
+            return
+        }
+        let case2 = equalizeArray([3,3,2,1,3])
+        if case2 != 2 {
+            print("case2 failure.. \(case2)")
+            return
+        }
+        print("Success!")
+    }
+    
+    private func equalizeArray(_ arr: [Int]) -> Int {
+        
+        var mostNumberCount = 0
+        var prevNumber: Int?
+        var numberCount = 0
+        
+        arr.sorted().forEach {
+            
+            switch prevNumber {
+            case nil:
+                numberCount = 1
+                mostNumberCount = 1
+                prevNumber = $0
+            case $0:
+                numberCount += 1
+            default:
+                numberCount = 1
+                prevNumber = $0
+            }
+
+            if (mostNumberCount < numberCount) {
+                mostNumberCount = numberCount
+            }
+        }
+        return arr.count - mostNumberCount
     }
 }
