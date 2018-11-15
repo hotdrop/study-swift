@@ -5,7 +5,7 @@ public class Implementation: Study {
     public init() {}
     
     public func run() {
-        let exec = 7
+        let exec = 8
         switch exec {
         case 1:
             execBeautifulDaysAtTheMovies()
@@ -21,6 +21,8 @@ public class Implementation: Study {
             execRepeatedString()
         case 7:
             execEqualizeArray()
+        case 8:
+            execAcmTeam()
         default:
             print("nothing run code")
         }
@@ -313,5 +315,47 @@ public class Implementation: Study {
             }
         }
         return arr.count - mostNumberCount
+    }
+    
+    private func execAcmTeam() {
+        let case1 = acmTeam(topic: ["10101", "11100", "11010", "00101"])
+        if case1[0] != 5 || case1[1] != 2 {
+            print("Case1 Failure.. answer = \(case1[0]) \(case1[1])")
+            return
+        }
+        let case2 = acmTeam(topic: ["11101", "10101", "11001", "10111", "10000", "01110"])
+        if case2[0] != 5 || case2[1] != 6 {
+            print("Case2 Failure.. answer = \(case2[0]) \(case2[1])")
+            return
+        }
+        print("Success!")
+    }
+    private func acmTeam(topic: [String]) -> [Int] {
+        func countByOR(s1: String, s2: String) -> Int {
+            var cnt = 0
+            let s1Chars = s1.map { String($0) }
+            let s2Chars = s2.map { String($0) }
+            for idx in 0..<s1.count {
+                if s1Chars[idx] == "1" || s2Chars[idx] == "1" {
+                   cnt += 1
+                }
+            }
+            return cnt
+        }
+        
+        var knownFieldCount = 0
+        var pairCount = 0
+        for outIndex in 0..<topic.count {
+            for inIndex in outIndex..<topic.count {
+                let cnt = countByOR(s1: topic[outIndex], s2: topic[inIndex])
+                if knownFieldCount < cnt {
+                    knownFieldCount = cnt
+                    pairCount = 1
+                } else if knownFieldCount == cnt {
+                    pairCount += 1
+                }
+            }
+        }
+        return [knownFieldCount, pairCount]
     }
 }
