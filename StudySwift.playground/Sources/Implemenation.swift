@@ -358,4 +358,19 @@ public class Implementation: Study {
         }
         return [knownFieldCount, pairCount]
     }
+    
+    private func howManyGames(p: Int, d: Int, m: Int, s: Int) -> Int {
+        if s < p {
+            return 0
+        }
+        var count = 0
+        var balance = s
+        var price = p
+        while balance >= m {
+            count += 1
+            balance -= price
+            price = max(price - d, m)
+        }
+        return count
+    }
 }
